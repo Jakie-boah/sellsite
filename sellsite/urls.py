@@ -1,4 +1,5 @@
-"""sellsite URL Configuration
+"""
+sellsite URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/4.1/topics/http/urls/
@@ -15,7 +16,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-
+from users import views as auth_url
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', auth_url.register, name='register'),
+    path('login', auth_url.log_in, name='login')
+
 ]

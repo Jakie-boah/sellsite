@@ -29,9 +29,10 @@ ALLOWED_HOSTS = []
 
 
 # Application definition
+AUTH_USER_MODEL = 'users.UserProfile'
 
 INSTALLED_APPS = [
-    'items-window.apps.ItemsWindowConfig',
+    'items_window.apps.ItemsWindowConfig',
     'handlers.apps.HandlersConfig',
     'users.apps.UsersConfig',
     'django.contrib.admin',
