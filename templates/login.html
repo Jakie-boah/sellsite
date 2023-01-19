@@ -1,12 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-    <form action="{% url 'login' %}" method="post">
+{% include 'header.html' %}
+
+
+<main class="form-signin w-100 m-auto">
+    <div class="container_1">
+  <form action="{% url 'login' %}" method="post">
                 {% csrf_token %}
+
+      <h1 class="h3 mb-3 fw-normal">Войти</h1>
+
   {% if messages %}
 <ul class="messages">
     {% for message in messages %}
@@ -32,16 +33,18 @@
     {% endfor %}
 {% endif %}
 
-<div class="mb-10">
-<label>Логин*</label>
-{{ form.login }}
-</div>
-<div class="mb-10">
-<label>Пароль</label>
-    {{form.password}}
-</div>
-                <input type="submit" name='action' value="Войти" class="register-button mt-0 float-none w-100">
+    <div class="form-floating">
+        {{ form.login }}
+        <label>Номер телефона</label>
+    </div>
+     <div class="form-floating">
+         {{ form.password }}
+      <label>Пароль</label>
+    </div>
+      <input type="submit" name='action' value="Войти" class="w-100 btn btn-lg btn-dark">
 
-    </form>
-</body>
-</html>
+  </form>
+    </div>
+</main>
+
+{%include "footer.html"%}

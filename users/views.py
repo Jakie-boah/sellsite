@@ -5,15 +5,16 @@ from loguru import logger
 from django.contrib import messages
 from django.contrib.auth import login
 from .models import UserProfile
+
 # Create your views here.
 
 
 def register(request):
+
     if request.method == 'POST':
 
-        if request.POST['action'] == 'Продолжить':
+        if request.POST['action'] == 'Зарегистрироваться':
             form = UserForm(request.POST)
-            logger.info(form)
             if form.is_valid():
 
                 user = form.save()
@@ -21,6 +22,7 @@ def register(request):
                 user.password = password
                 user.save(update_fields=['password'])
                 logger.info('Зареган новый пользователь')
+                messages.success(request, 'Зареган новый пользователь')
             else:
                 logger.error('Ошибка')
 
@@ -36,13 +38,16 @@ def register(request):
 
 def log_in(request):
     if request.method == 'POST':
+
         if request.POST['action'] == 'Войти':
             form = LoginForm(request.POST)
+
             if form.is_valid():
                 user = UserProfile.objects.filter(phone_number=form.cleaned_data['login']).first()
                 if user is not None and user.password == form.cleaned_data['password']:
                     login(request, user)
                     logger.success('нашел. зашел')
+                    messages.success(request, 'нашел. зашел')
 
                 elif user.password != form.cleaned_data['password']:
                     messages.error(request, 'Ошибка в пароле')
@@ -51,7 +56,11 @@ def log_in(request):
     else:
         form = LoginForm()
 
-    return render(request, './login.html', {'form': form})
+    params = {
+        'form': form
+    }
+
+    return render(request, './login.html', params)
 
 
 

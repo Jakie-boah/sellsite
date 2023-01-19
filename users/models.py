@@ -12,7 +12,7 @@ class UserProfile(AbstractUser):
     email = models.EmailField(unique=True)
     password = models.CharField(verbose_name='Пароль', max_length=100, blank=True, null=True)
 
-    USERNAME_FIELD = 'email'
+    USERNAME_FIELD = 'phone_number'
     REQUIRED_FIELDS = ['username']
 
     def __str__(self):

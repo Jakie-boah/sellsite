@@ -6,10 +6,18 @@ from django.core.exceptions import ValidationError
 
 class UserForm(forms.ModelForm):
 
-    phone_number = PhoneNumberField(required=False)
-    username = forms.CharField(max_length=50, label='Имя', required=False)
-    usersurname = forms.CharField(max_length=50, label='Фамилия', required=False)
-    email = forms.EmailField(error_messages={'invalid':"Допустили ошибку в email"})
+    phone_number = PhoneNumberField(required=False, label='Номер телефона',
+                                    widget=forms.TextInput(attrs={'placeholder': '+7()..',
+                                                                  'class': 'form-control regist-input'}))
+    username = forms.CharField(max_length=50, label='Имя', required=False,
+                               widget=forms.TextInput(attrs={'placeholder': 'Имя',
+                                                             'class': 'form-control regist-input'}))
+    usersurname = forms.CharField(max_length=50, label='Фамилия', required=False,
+                                  widget=forms.TextInput(attrs={'placeholder': 'Фамилия',
+                                                                'class': 'form-control regist-input'}))
+    email = forms.EmailField(error_messages={'invalid': "Допустили ошибку в email"},
+                             widget=forms.EmailInput(attrs={'placeholder': 'Адрес почты',
+                                                            'class': 'form-control regist-input'}))
 
     phone_number.error_messages['invalid'] = 'некорректно'
 
@@ -43,8 +51,12 @@ class UserForm(forms.ModelForm):
 
 
 class LoginForm(forms.Form):
-    login = forms.CharField(max_length=150, required=False, label='Логин')
-    password = forms.CharField(max_length=150, required=False)
+    login = forms.CharField(max_length=150, required=False, label='Логин',
+                            widget=forms.TextInput(attrs={'placeholder': '+7()..',
+                                                          'class': 'form-control regist-input'}))
+    password = forms.CharField(max_length=150, required=False,
+                               widget=forms.PasswordInput(attrs={'placeholder': 'Пароль',
+                                                                 'class': 'form-control regist-input'}))
     def clean_login(self):
         login = self.cleaned_data.get('login')
         if not login:
