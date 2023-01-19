@@ -17,9 +17,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from users import views as auth_url
+from items_window import views as it_url
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', auth_url.register, name='register'),
-    path('login', auth_url.log_in, name='login')
+    path('login', auth_url.log_in, name='login'),
+    path('test', it_url.post, name='post'),
 
 ]

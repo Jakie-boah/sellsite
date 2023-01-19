@@ -5,7 +5,6 @@ from loguru import logger
 from django.contrib import messages
 from django.contrib.auth import login
 from .models import UserProfile
-
 # Create your views here.
 
 
@@ -21,6 +20,7 @@ def register(request):
                 password = get_random_string(length=7)
                 user.password = password
                 user.save(update_fields=['password'])
+                login(request, user)
                 logger.info('Зареган новый пользователь')
                 messages.success(request, 'Зареган новый пользователь')
             else:
@@ -61,11 +61,5 @@ def log_in(request):
     }
 
     return render(request, './login.html', params)
-
-
-
-
-
-
 
 
