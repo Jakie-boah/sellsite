@@ -1,6 +1,9 @@
 from django.db import models
 from phonenumber_field.modelfields import PhoneNumberField
 from .handler import *
+#from geodata.models import Region
+#from cities_light.models import Region
+
 # Create your models here.
 
 
@@ -9,7 +12,7 @@ class Item(models.Model):
     type = models.CharField(max_length=15, choices=type_choices, verbose_name='Тип')
     item_type = models.CharField(max_length=50, choices=item_type_choices, verbose_name='Тип объекта')
     phone_number = PhoneNumberField()
-    region = models.CharField(max_length=50, verbose_name='Регион')
+    region = models.CharField(verbose_name='Город', max_length=50)
     city = models.CharField(verbose_name='Город', max_length=50)
     street = models.CharField(verbose_name='Улицы', max_length=50)
     floor = models.IntegerField(verbose_name='Этаж', null=True, blank=True)

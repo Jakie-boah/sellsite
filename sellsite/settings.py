@@ -30,8 +30,16 @@ ALLOWED_HOSTS = []
 
 # Application definition
 AUTH_USER_MODEL = 'users.UserProfile'
+# CITIES_LIGHT_TRANSLATION_LANGUAGES = ['fr', 'en']
+# CITIES_LIGHT_INCLUDE_COUNTRIES = ['FR']
+# CITIES_LIGHT_INCLUDE_CITY_TYPES = ['ADMD']
+CITIES_LIGHT_TRANSLATION_LANGUAGES = ['ru']
+CITIES_LIGHT_INCLUDE_COUNTRIES = ['RU']
+CITIES_LIGHT_INCLUDE_CITY_TYPES = ['ADMD']
 
 INSTALLED_APPS = [
+    'cities_light',
+    # 'geodata',
     'items_window.apps.ItemsWindowConfig',
     'handlers.apps.HandlersConfig',
     'users.apps.UsersConfig',
@@ -42,7 +50,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ]
-
+# CITIES_LIGHT_APP_NAME = 'geodata'
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
